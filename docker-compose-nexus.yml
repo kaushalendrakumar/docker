@@ -1,0 +1,12 @@
+version: "3"  
+nexus:
+    container_name: mynexus-new
+    image: sonatype/nexus3
+    ports:
+      - "8081:8081"
+    volumes:
+      - "/root/nexus/nexus_home/:/nexus-data sonatype/nexus3"
+    networks:
+      - net
+networks:
+  net:

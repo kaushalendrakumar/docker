@@ -1,0 +1,23 @@
+version: "3"
+services:
+  jenkins:
+    container_name: jenkinsbasic
+    image: jenkins/jenkins
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/root/jenkins-data/jenkins_home:/var/jenkins_home"
+    networks:
+      - net
+  nexus:
+    container_name: mynexus-new
+    image: sonatype/nexus3
+    ports:
+      - "8081:8081"
+    volumes:
+      - "/root/nexus/nexus_home/:/nexus-data sonatype/nexus3"
+    networks:
+      - net
+networks:
+  net:
+
