@@ -1,0 +1,28 @@
+---
+- hosts: all
+  
+  tasks:
+  - name: upgrade all packages
+    yum:
+      name: '*'
+      state: latest
+
+  - name: Configure the required Docker Repos for installing Docker
+    shell: |
+     yum update -y
+     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+     yum-config-manager --enable docker-ce-nightly
+     yum-config-manager --enable docker-ce-test 
+
+  - name: Ensure the list of packages installed
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - yum-utils
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose
+      notify: 
+        - Start Docker
