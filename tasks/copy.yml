@@ -1,0 +1,16 @@
+---
+
+- name: Copy the alias file fort setting up the alias
+  copy:
+    src: files/alias.txt
+    destination: /home/root
+
+- name: Configure the alias
+  shell: |
+     cd /home/root
+     cat alias.xt >> ~/.bashrc
+
+- name: copy the docker-compose file
+  copy:
+    src: files/docker-compose.yml
+    destination: /home/root
