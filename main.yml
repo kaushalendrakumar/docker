@@ -4,4 +4,4 @@
     - name: Deploy Docker
       import_tasks: install-docker.yml
       import_tasks: copy.yml
-      import_tasks: run-docker.yml 
+      #import_tasks: run-docker.yml 
