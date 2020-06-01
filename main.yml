@@ -1,5 +1,5 @@
 ---
 - hosts: all
-- import_task: install-docker.yml
-- import_task: copy.yml
-- import_task: run-docker.yml 
+- import_tasks: install-docker.yml
+- import_tasks: copy.yml
+- import_tasks: run-docker.yml 
