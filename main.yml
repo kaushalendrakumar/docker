@@ -41,7 +41,7 @@
   - name: copy the docker-compose file
     copy:
         src: docker-compose.yml
-        destination: /home/ansible
+        dest: /home/ansible
 
   - name: Run Jenkins on docker
     shell: |
