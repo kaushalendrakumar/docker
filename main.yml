@@ -31,7 +31,7 @@
   - name: Copy the alias file fort setting up the alias
     copy:
         src: alias.txt
-        destination: /home/root
+        dest: /home/root
 
   - name: Configure the alias
     shell: |
