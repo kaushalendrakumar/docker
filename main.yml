@@ -31,17 +31,17 @@
   - name: Copy the alias file fort setting up the alias
     copy:
         src: alias.txt
-        dest: /home/root
+        dest: /home/ansible
 
   - name: Configure the alias
     shell: |
-        cd /home/root
+        cd /home/ansible
         cat alias.xt >> ~/.bashrc
 
   - name: copy the docker-compose file
     copy:
         src: docker-compose.yml
-        destination: /home/root
+        destination: /home/ansible
 
   - name: Run Jenkins on docker
     shell: |
