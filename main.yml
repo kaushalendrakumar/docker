@@ -36,7 +36,7 @@
   - name: Configure the alias
     shell: |
         cd /home/ansible
-        cat alias.xt >> ~/.bashrc
+        cat alias.txt >> ~/.bashrc
 
   - name: copy the docker-compose file
     copy:
