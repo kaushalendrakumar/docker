@@ -1,9 +1,0 @@
----
-
-tasks:
-
-  - name: Configure the required Docker Repos for installing Docker
-    shell: |
-        docker volume myvol1
-        docker pull jenkins/jenkins
-        dr --name myjenkins1 -v myvol:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins

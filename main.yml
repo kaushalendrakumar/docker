@@ -1,6 +1,50 @@
+
 ---
-tasks: 
-- name: Deploy Docker
-    import_task: install-docker.yml
-    import_task: copy.yml
-    import_task: run-docker.yml 
+- hosts: all
+  
+  tasks:
+  - name: upgrade all packages
+    yum:
+      name: '*'
+      state: latest
+
+  - name: Configure the required Docker Repos for installing Docker
+    shell: |
+     yum update -y
+     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+     yum-config-manager --enable docker-ce-nightly
+     yum-config-manager --enable docker-ce-test 
+
+  - name: Ensure the list of packages installed
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - yum-utils
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose
+      notify: 
+        - Start Docker
+
+  - name: Copy the alias file fort setting up the alias
+    copy:
+        src: alias.txt
+        destination: /home/root
+
+  - name: Configure the alias
+    shell: |
+        cd /home/root
+        cat alias.xt >> ~/.bashrc
+
+  - name: copy the docker-compose file
+    copy:
+        src: docker-compose.yml
+        destination: /home/root
+
+  - name: Run Jenkins on docker
+    shell: |
+        docker volume create myvol1
+        docker pull jenkins/jenkins
+        docker run --name myjenkins1 -v myvol:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins
